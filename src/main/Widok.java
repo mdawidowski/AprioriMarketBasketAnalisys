@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package main;
-import main.ClearData;
 /**
- *
+ * widoki
  * @author marcin
  */
 public class Widok extends javax.swing.JFrame {
@@ -56,19 +55,19 @@ public class Widok extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(PrepareButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CloseButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(613, Short.MAX_VALUE))
+                .addContainerGap(500, Short.MAX_VALUE)
+                .addComponent(PrepareButton)
+                .addGap(40, 40, 40)
+                .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(463, Short.MAX_VALUE)
-                .addComponent(PrepareButton)
-                .addGap(60, 60, 60)
-                .addComponent(CloseButton)
+                .addContainerGap(553, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CloseButton)
+                    .addComponent(PrepareButton))
                 .addGap(25, 25, 25))
         );
 
@@ -84,7 +83,7 @@ public class Widok extends javax.swing.JFrame {
     }//GEN-LAST:event_PrepareButtonActionPerformed
 
     private void PrepareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrepareButtonMouseClicked
-       main.ClearData.przygotuj();        // TODO add your handling code here:
+       main.DataPreparation.przygotujplik();        // TODO add your handling code here:
     }//GEN-LAST:event_PrepareButtonMouseClicked
 
     /**
