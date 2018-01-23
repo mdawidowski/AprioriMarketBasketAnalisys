@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main;
+import view.Widok;
 import javax.swing.SwingUtilities;
 /**
  *
@@ -12,10 +13,11 @@ import javax.swing.SwingUtilities;
 public class Main {
   public static void main(String[] args) {
       SwingUtilities.invokeLater(() -> {
-          main.Widok interfejs = new main.Widok();
+          view.Widok interfejs = new view.Widok();
+          model.Funkcje funkcje = new model.Funkcje();
           
-          Widok okno = new main.Widok();
-          
+          Widok okno = new view.Widok();
+
           okno.setVisible(true);
       });
               }
