@@ -6,6 +6,7 @@
 package view;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
@@ -101,17 +102,23 @@ public class Widok extends javax.swing.JFrame {
 
     private void PrepareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrepareButtonMouseClicked
         funkcje.DataPreparation.przygotujplik();
-        try {
-            model.Funkcje.prepare();
-        } catch (IOException | SQLException ex) {
-            Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//       try {
+//           model.Funkcje.prepare();
+//       } catch (IOException | SQLException ex) {
+//           Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+//       }
 
     }//GEN-LAST:event_PrepareButtonMouseClicked
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         try {
-            model.Funkcje.countSupport("00141833");        // TODO add your handling code here:
+            try {
+                model.Funkcje.countSupport("00141833", funkcje.DataPreparation.getlinesnumber());        // TODO add your handling code here:
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }

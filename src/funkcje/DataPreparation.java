@@ -24,7 +24,9 @@ public static void przygotujplik(){
          tekst = fin.readLine();
          while(tekst!=null){
            counter += 1;
-           tekscik = tekst.substring(20,57);
+           tekscik = tekst.substring(0,57);
+           tekscik = tekst.replace(" ;", ";");
+           tekscik = tekst.replace(" 00:00:00", "");
            sB.append(tekscik);
            sB.append("\n");
            tekst = fin.readLine();
@@ -39,5 +41,16 @@ public static void przygotujplik(){
      } catch (FileNotFoundException e) {}
    } catch (IOException e) {}
  }
+
+public static int getlinesnumber() throws FileNotFoundException, UnsupportedEncodingException, IOException{
+   File input = new File("plain.txt");
+   Reader reader;
+   reader = new InputStreamReader(new FileInputStream(input),"ASCII");
+   BufferedReader fin = new BufferedReader(reader);
+   String number = fin.readLine();
+   fin.close();
+   int liczba = Integer.parseInt(number);
+   return liczba;
+}
 
 }
