@@ -8,7 +8,7 @@ package view;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DataPreparation;
+import java.sql.SQLException;
 
 /**
  * widoki
@@ -34,6 +34,7 @@ public class Widok extends javax.swing.JFrame {
 
         CloseButton = new javax.swing.JButton();
         PrepareButton = new javax.swing.JButton();
+        calculateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,12 +57,21 @@ public class Widok extends javax.swing.JFrame {
             }
         });
 
+        calculateButton.setText("Oblicz");
+        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                calculateButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(500, Short.MAX_VALUE)
+                .addContainerGap(386, Short.MAX_VALUE)
+                .addComponent(calculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(PrepareButton)
                 .addGap(40, 40, 40)
                 .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -73,7 +83,8 @@ public class Widok extends javax.swing.JFrame {
                 .addContainerGap(553, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CloseButton)
-                    .addComponent(PrepareButton))
+                    .addComponent(PrepareButton)
+                    .addComponent(calculateButton))
                 .addGap(25, 25, 25))
         );
 
@@ -89,9 +100,22 @@ public class Widok extends javax.swing.JFrame {
     }//GEN-LAST:event_PrepareButtonActionPerformed
 
     private void PrepareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrepareButtonMouseClicked
-        model.DataPreparation.przygotujplik();
+        funkcje.DataPreparation.przygotujplik();
+        try {
+            model.Funkcje.prepare();
+        } catch (IOException | SQLException ex) {
+            Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_PrepareButtonMouseClicked
+
+    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+        try {
+            model.Funkcje.countSupport("00141833");        // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_calculateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,5 +155,6 @@ public class Widok extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CloseButton;
     private static javax.swing.JButton PrepareButton;
+    private javax.swing.JButton calculateButton;
     // End of variables declaration//GEN-END:variables
 }

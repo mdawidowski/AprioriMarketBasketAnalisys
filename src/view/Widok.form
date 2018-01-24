@@ -24,7 +24,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="500" max="32767" attributes="0"/>
+              <EmptySpace pref="386" max="32767" attributes="0"/>
+              <Component id="calculateButton" min="-2" pref="96" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="PrepareButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="CloseButton" min="-2" pref="115" max="-2" attributes="0"/>
@@ -39,6 +41,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="CloseButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="PrepareButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="calculateButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
@@ -65,6 +68,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="calculateButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Oblicz"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="calculateButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
