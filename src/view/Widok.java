@@ -33,8 +33,8 @@ public class Widok extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        radioGroup = new javax.swing.ButtonGroup();
         CloseButton = new javax.swing.JButton();
-        PrepareButton = new javax.swing.JButton();
         calculateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,18 +43,6 @@ public class Widok extends javax.swing.JFrame {
         CloseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CloseButtonActionPerformed(evt);
-            }
-        });
-
-        PrepareButton.setText("Przygotuj dane");
-        PrepareButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PrepareButtonMouseClicked(evt);
-            }
-        });
-        PrepareButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrepareButtonActionPerformed(evt);
             }
         });
 
@@ -70,11 +58,9 @@ public class Widok extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(386, Short.MAX_VALUE)
+                .addContainerGap(541, Short.MAX_VALUE)
                 .addComponent(calculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(PrepareButton)
-                .addGap(40, 40, 40)
                 .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(66, 66, 66))
         );
@@ -84,7 +70,6 @@ public class Widok extends javax.swing.JFrame {
                 .addContainerGap(553, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CloseButton)
-                    .addComponent(PrepareButton)
                     .addComponent(calculateButton))
                 .addGap(25, 25, 25))
         );
@@ -95,20 +80,6 @@ public class Widok extends javax.swing.JFrame {
     private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseButtonActionPerformed
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_CloseButtonActionPerformed
-
-    private void PrepareButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrepareButtonActionPerformed
-            // TODO add your handling code here:
-    }//GEN-LAST:event_PrepareButtonActionPerformed
-
-    private void PrepareButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrepareButtonMouseClicked
-        funkcje.DataPreparation.przygotujplik();
-//       try {
-//           model.Funkcje.prepare();
-//       } catch (IOException | SQLException ex) {
-//           Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
-//       }
-
-    }//GEN-LAST:event_PrepareButtonMouseClicked
 
     private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
         try {
@@ -161,7 +132,7 @@ public class Widok extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CloseButton;
-    private static javax.swing.JButton PrepareButton;
     private javax.swing.JButton calculateButton;
+    private javax.swing.ButtonGroup radioGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,10 +25,11 @@ import java.text.DecimalFormat;
  * @author marcin
  */
 public class Funkcje {
-    public static Baza b = new Baza();
-    public static Baza c = new Baza();
+public static Baza b = new Baza();
+public static Baza c = new Baza();
+public static Baza d = new Baza();
 
-    public static void prepare() throws IOException, FileNotFoundException, UnsupportedEncodingException, SQLException {
+public static void prepare() throws IOException, FileNotFoundException, UnsupportedEncodingException, SQLException {
         // z pliku do tabeli o wymiarze [5,w]
         // wczytujemy dane z pliku, pierwsza linijka to ilość wierszy z danymi, reszta to dane
         // wczytane elementy wpisujemy do tablicy dwuwymiarowej na której będziemy działać
@@ -61,17 +62,24 @@ public class Funkcje {
         fin.close();
 }
 
-	 public static void countSupport(String id, int lines) throws SQLException{
-             DecimalFormat df = new DecimalFormat("#.##########");
-             id="130207";
-             String query = "SELECT count(*) FROM Transakcje WHERE produktkid like '" + id + "%'";
-             Statement stmt = c.conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query);
-             String value;
-             value = rs.getString(1);
-             float select = Float.parseFloat(value);
-             select = select / lines;
-             System.out.println("MB2 in Decimal Notation: " + df.format(select));
-             System.out.println(select);
-	 }
+public static void insertTransactionIdtoDB() throws SQLException{
+        String query = "SELECT DISTINCT data,klient FROM Transakcje;";
+        String query2 = "UPDATE Transakcje SET transakcjaid= WHERE (data= and klient like );";
+        Statement stmt = d.conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+}
+
+public static void countSupport(String id, int lines) throws SQLException {
+        DecimalFormat df = new DecimalFormat("#.##########");
+        id="130207";
+        String query = "SELECT count(*) FROM Transakcje WHERE produktkid like '" + id + "%'";
+        Statement stmt = c.conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        String value;
+        value = rs.getString(1);
+        float select = Float.parseFloat(value);
+        select = select / lines;
+        System.out.println("MB2 in Decimal Notation: " + df.format(select));
+        System.out.println(select);
+}
 }
