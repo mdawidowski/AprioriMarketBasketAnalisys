@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -62,11 +64,38 @@ public static void prepare() throws IOException, FileNotFoundException, Unsuppor
         fin.close();
 }
 
-public static void insertTransactionIdtoDB() throws SQLException{
+public static void insertTransactionIdtoDB() throws SQLException {
         String query = "SELECT DISTINCT data,klient FROM Transakcje;";
-        String query2 = "UPDATE Transakcje SET transakcjaid= WHERE (data= and klient like );";
         Statement stmt = d.conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
+        List rowValues = new ArrayList();
+        List colValues = new ArrayList();
+        while (rs.next()) {
+                rowValues.add(rs.getString(1));
+                colValues.add(rs.getString(2));
+        }
+        // You can then put this back into an array if necessary
+        String[] ListDate,ListKlient;
+        ListDate = (String[])rowValues.toArray(new String[rowValues.size()]);
+        ListKlient = (String[])colValues.toArray(new String[colValues.size()]);
+//        System.out.println(Arrays.toString(ListDate) + Arrays.toString(ListKlient));
+        // for (int i = 0; i <= ListDate.length; i++) {
+        //         ResultSet rs1 = stmt.executeQuery("UPDATE Transakcje SET transakcjaid=" + i + " WHERE (data=" + ListDate[i] + " and klient like " + ListKlient[i] + ");");
+        //         rs1.close();
+        //
+        // }
+
+        String INSERT_RECORD = "UPDATE Transakcje SET transakcjaid=? WHERE (data=? and klient like ? );";
+
+        PreparedStatement pstmt = d.conn.prepareStatement(INSERT_RECORD);
+
+        for(int i=1; i<ListDate.length; i++) {
+          System.out.println(ListDate[i] + " " + ListKlient[i]);
+                pstmt.setInt(1, i);
+                pstmt.setString(2, ListDate[i]);
+                pstmt.setString(3, ListKlient[i]);
+                pstmt.executeUpdate();
+        }
 }
 
 public static void countSupport(String id, int lines) throws SQLException {
