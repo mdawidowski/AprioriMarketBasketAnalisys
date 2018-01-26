@@ -1,0 +1,6 @@
+private void initComponents() throws SQLException {
+
+String[] ProduktArray = model.Funkcje.displayProducts();
+ProduktComboBox = new javax.swing.JComboBox<>(ProduktArray);
+DefaultComboBoxModel model = new DefaultComboBoxModel(ProduktArray);
+ProducomboBox.setModel(model);

@@ -100,8 +100,7 @@ public static void insertTransactionIdtoDB() throws SQLException {
 
 public static void countSupport(String id, int lines) throws SQLException {
         DecimalFormat df = new DecimalFormat("#.##########");
-        id="130207";
-        String query = "select count(*) from Transakcje where produktklasa like '" + id + "%'";
+        String query = "select count(*) from Transakcje where produktid like '" + id + "%'";
         Statement stmt = c.conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         String value;
