@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -90,7 +91,6 @@ public static void insertTransactionIdtoDB() throws SQLException {
         PreparedStatement pstmt = d.conn.prepareStatement(INSERT_RECORD);
 
         for(int i=1; i<ListDate.length; i++) {
-          System.out.println(ListDate[i] + " " + ListKlient[i]);
                 pstmt.setInt(1, i);
                 pstmt.setString(2, ListDate[i]);
                 pstmt.setString(3, ListKlient[i]);
@@ -101,14 +101,27 @@ public static void insertTransactionIdtoDB() throws SQLException {
 public static void countSupport(String id, int lines) throws SQLException {
         DecimalFormat df = new DecimalFormat("#.##########");
         id="130207";
-        String query = "SELECT count(*) FROM Transakcje WHERE produktkid like '" + id + "%'";
+        String query = "select count(*) from Transakcje where produktklasa like '" + id + "%'";
         Statement stmt = c.conn.createStatement();
         ResultSet rs = stmt.executeQuery(query);
         String value;
         value = rs.getString(1);
         float select = Float.parseFloat(value);
         select = select / lines;
-        System.out.println("MB2 in Decimal Notation: " + df.format(select));
-        System.out.println(select);
+        System.out.println(df.format(select));
+
+}
+
+public static String[] displayProducts() throws SQLException{
+        String query = "SELECT DISTINCT produktid FROM Transakcje;";
+        Statement stmt = d.conn.createStatement();
+        ResultSet rs = stmt.executeQuery(query);
+        List produktValues = new ArrayList();
+        while (rs.next()) {
+                produktValues.add(rs.getString(1));
+        }
+        String[] ProduktList;
+        ProduktList = (String[])produktValues.toArray(new String[produktValues.size()]);
+        return ProduktList;
 }
 }

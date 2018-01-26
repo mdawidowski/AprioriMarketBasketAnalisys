@@ -10,6 +10,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * widoki
@@ -19,8 +20,9 @@ public class Widok extends javax.swing.JFrame {
 
     /**
      * Creates new form Widok
+     * @throws java.sql.SQLException
      */
-    public Widok() {
+    public Widok() throws SQLException {
         initComponents();
     }
 
@@ -31,12 +33,14 @@ public class Widok extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents() throws SQLException {
 
         radioGroup = new javax.swing.ButtonGroup();
         CloseButton = new javax.swing.JButton();
-        calculateButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        CalculateButton = new javax.swing.JButton();
+        TransakcjaButton = new javax.swing.JButton();
+        String[] ProduktArray = model.Funkcje.displayProducts();
+        ProduktComboBox = new javax.swing.JComboBox<>(ProduktArray);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,45 +51,50 @@ public class Widok extends javax.swing.JFrame {
             }
         });
 
-        calculateButton.setText("Oblicz");
-        calculateButton.addActionListener(new java.awt.event.ActionListener() {
+        CalculateButton.setText("Oblicz");
+        CalculateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calculateButtonActionPerformed(evt);
+                CalculateButtonActionPerformed(evt);
             }
         });
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TransakcjaButton.setText("Twórz Transakcje");
+        TransakcjaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TransakcjaButtonActionPerformed(evt);
             }
         });
+
+        DefaultComboBoxModel model = new DefaultComboBoxModel(ProduktArray);
+        ProduktComboBox.setModel(model);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(397, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(calculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(367, 367, 367))))
+                .addContainerGap(389, Short.MAX_VALUE)
+                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(TransakcjaButton)
+                .addGap(18, 18, 18)
+                .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(484, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(39, 39, 39)
+                .addGap(48, 48, 48)
+                .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 477, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CloseButton)
-                    .addComponent(calculateButton))
+                    .addComponent(CalculateButton)
+                    .addComponent(TransakcjaButton))
                 .addGap(25, 25, 25))
         );
 
@@ -96,7 +105,7 @@ public class Widok extends javax.swing.JFrame {
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_CloseButtonActionPerformed
 
-    private void calculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calculateButtonActionPerformed
+    private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
         try {
             try {
                 model.Funkcje.countSupport("00141833", funkcje.DataPreparation.getlinesnumber());        // TODO add your handling code here:
@@ -108,15 +117,20 @@ public class Widok extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_calculateButtonActionPerformed
+    }//GEN-LAST:event_CalculateButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void TransakcjaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransakcjaButtonActionPerformed
         try {
             model.Funkcje.insertTransactionIdtoDB();        // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_TransakcjaButtonActionPerformed
+
+
+    private void ProduktComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProduktComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ProduktComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,29 +148,30 @@ public class Widok extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Widok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Widok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Widok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Widok.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Widok().setVisible(true);
+                try {
+                    new Widok().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CalculateButton;
     private javax.swing.JButton CloseButton;
-    private javax.swing.JButton calculateButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> ProduktComboBox;
+    private javax.swing.JButton TransakcjaButton;
     private javax.swing.ButtonGroup radioGroup;
     // End of variables declaration//GEN-END:variables
 }
