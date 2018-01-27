@@ -224,9 +224,9 @@ public static float countSupport(int howmanytimes, int lines) {
         return wynik;
 }
 
-public static float countConfidence(float support, float support2) {
+public static float countConfidence(float support, float supportA) {
         //obliczanie confidence
-        float wynik = support/support2;
+        float wynik = support/supportA;
         return wynik;
 }
 public static float countLift(float confidence, float supportB){

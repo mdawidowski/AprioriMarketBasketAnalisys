@@ -40,15 +40,12 @@ public Widok() throws SQLException {
         radioGroup = new javax.swing.ButtonGroup();
         CloseButton = new javax.swing.JButton();
         CalculateButton = new javax.swing.JButton();
-        TransakcjaButton = new javax.swing.JButton();
         ProduktComboBox = new javax.swing.JComboBox<>();
         ProduktLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        PrzygotujButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,13 +63,6 @@ public Widok() throws SQLException {
             }
         });
 
-        TransakcjaButton.setText("Twórz Transakcje");
-        TransakcjaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TransakcjaButtonActionPerformed(evt);
-            }
-        });
-
         try{
             ProduktComboBox.setModel(new DefaultComboBoxModel(model.Funkcje.getProducts()));
         } catch (SQLException e) {};
@@ -87,14 +77,14 @@ public Widok() throws SQLException {
             ProduktLabel.setText("Wybierz produkt (1 z " + ProduktArray.length + ")");
         } catch (SQLException e) {};
 
-        jButton1.setText("Przygotuj plik");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        PrzygotujButton.setText("Przygotuj dane");
+        PrzygotujButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                PrzygotujButtonActionPerformed(evt);
             }
         });
 
-        Object columnNames[] = {"Produkt ID", "Ilosc wystąpień"};
+        Object columnNames[] = {"Produkt ID", "Ilosc wystąpień", "Support","Confidence","Lift","Conviction"};
         DefaultTableModel models = new DefaultTableModel(columnNames, 0);
         jTable1.setModel(models);
         jTable1.setEnabled(false);
@@ -105,11 +95,6 @@ public Widok() throws SQLException {
             jLabel1.setText("Łączna ilość transakcji: " + howmany);
         } catch (SQLException e) {};
 
-        Object columnNames2[] = {"Produkt ID", "Support","Confidence","Lift","Conviction"};
-        DefaultTableModel models2 = new DefaultTableModel(columnNames2, 0);
-        jTable2.setModel(models2);
-        jScrollPane2.setViewportView(jTable2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,49 +102,43 @@ public Widok() throws SQLException {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(ProduktLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(92, 92, 92)
+                        .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(TransakcjaButton)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(jButton1))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(60, 60, 60)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(98, Short.MAX_VALUE))
+                                .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(185, 185, 185)
+                                .addComponent(PrzygotujButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(61, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(ProduktLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(201, 201, 201))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(ProduktLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ProduktLabel)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(18, 18, 18)
+                .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CalculateButton)
-                    .addComponent(TransakcjaButton)
-                    .addComponent(jButton1)
+                    .addComponent(PrzygotujButton)
                     .addComponent(CloseButton))
-                .addContainerGap())
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -170,60 +149,54 @@ private void CloseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_CloseButtonActionPerformed
 
 private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalculateButtonActionPerformed
-        try {      
-            String[] totable = model.Funkcje.countHowManyTimes((String) ProduktComboBox.getSelectedItem());
-            Object columnNames[] = {"Produkt ID", "Ilosc wystąpień"};           
-            DefaultTableModel models = new DefaultTableModel(columnNames, 0);
-            String[] tab = new String[2];
-            for (int i = 0; i < totable.length; i += 2) {
-                tab[0] = totable[i];
-                tab[1] = totable[i+1];
-                models.addRow(tab);
-                jTable1.setModel(models);
-            }
-            Object columnNames2[] = {"Produkt ID", "Support","Confidence","Lift","Conviction"};
-            DefaultTableModel models2 = new DefaultTableModel(columnNames2, 0); 
-            String[] tab2 = new String[5];
-            int ilosctransakcji = model.Funkcje.countNumberofTransactions();    
-            int wspolnewystapienia=13;
-            DecimalFormat df = new DecimalFormat("#.#########");
-            float support = model.Funkcje.countSupport(wspolnewystapienia, ilosctransakcji);   // ilość wspólnych wystąpień/ilość wszystkich transakcji
-            int countit = model.Funkcje.countTransactionList((String) ProduktComboBox.getSelectedItem());        // zlicz ilość transakcji dla elementu
-            float supportA = model.Funkcje.countSupport(countit, ilosctransakcji);             // oblicz support(A)
-            float confidence = model.Funkcje.countConfidence(support,supportA);                // oblicz Confidence support(A->B)/support(B)
-            int countitB = model.Funkcje.countTransactionList(totable[0]);
-            float supportB = model.Funkcje.countSupport(countit, ilosctransakcji);             // oblicz support(B)
-            float lift = model.Funkcje.countLift(confidence, supportB);
-            float conviction = model.Funkcje.countConviction(confidence,supportB);
-            System.out.println("Support = " + support + " SupportA= " + supportA);
-            System.out.println("conf= " + confidence + "; lift= " + lift + "; conv= " + conviction);
+        try {
+                String[] totable = model.Funkcje.countHowManyTimes((String) ProduktComboBox.getSelectedItem());
+                Object columnNames[] = {"Produkt ID", "Ilosc wystąpień", "Support","Confidence","Lift","Conviction"};
+                DefaultTableModel models = new DefaultTableModel(columnNames, 0);
+                String[] tab = new String[6];
+                int ilosctransakcji = model.Funkcje.countNumberofTransactions();
+                
+                DecimalFormat df = new DecimalFormat("#.#########");
+                for (int i = 0; i < totable.length/2; i+=2) {
+                    int wspolnewystapienia = Integer.parseInt(totable[i+1]);
+                    float support = model.Funkcje.countSupport(wspolnewystapienia, ilosctransakcji); // ilość wspólnych wystąpień/ilość wszystkich transakcji
+                        int countit = model.Funkcje.countTransactionList((String) ProduktComboBox.getSelectedItem()); // zlicz ilość transakcji dla elementu
+                        float supportA = model.Funkcje.countSupport(countit, ilosctransakcji); // oblicz support(A)
+                        float confidence = model.Funkcje.countConfidence(support,supportA);    // oblicz Confidence support(A->B)/support(B)
+                        int countitB = model.Funkcje.countTransactionList(totable[i]);
+                        float supportB = model.Funkcje.countSupport(countitB, ilosctransakcji); // oblicz support(B)
+                        float lift = model.Funkcje.countLift(confidence, supportB);
+                        float conviction = model.Funkcje.countConviction(confidence,supportB);
+                        tab[0] = totable[i];
+                        tab[1] = totable[i+1];
+                        tab[2] = df.format(support);
+                        tab[3] = df.format(confidence);
+                        tab[4] = df.format(lift);
+                        tab[5] = df.format(conviction);
+                        models.addRow(tab);
+                        jTable1.setModel(models);
+                }
+
         } catch (SQLException ex) {
                 Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }
 }//GEN-LAST:event_CalculateButtonActionPerformed
-
-private void TransakcjaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TransakcjaButtonActionPerformed
-        try {
-                model.Funkcje.insertTransactionIdtoDB();    // TODO add your handling code here:
-        } catch (SQLException ex) {
-                Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
-        }
-}//GEN-LAST:event_TransakcjaButtonActionPerformed
 
 
 private void ProduktComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProduktComboBoxActionPerformed
         // TODO add your handling code here:
 }//GEN-LAST:event_ProduktComboBoxActionPerformed
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+private void PrzygotujButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrzygotujButtonActionPerformed
         try {
                 funkcje.DataPreparation.przygotujplik();
                 model.Funkcje.insertToDB();
-                model.Funkcje.insertTransactionIdtoDB(); // TODO add your handling code here:
+                model.Funkcje.insertTransactionIdtoDB(); 
+    // TODO add your handling code here:
         } catch (IOException | SQLException ex) {
                 Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }
-}//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_PrzygotujButtonActionPerformed
 
 /**
  * @param args the command line arguments
@@ -250,12 +223,12 @@ public static void main(String args[]) {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            try {
-                new Widok().setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+                                                try {
+                                                        new Widok().setVisible(true);
+                                                } catch (SQLException ex) {
+                                                        Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
+                                        });
 }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -263,13 +236,10 @@ public static void main(String args[]) {
     private javax.swing.JButton CloseButton;
     private javax.swing.JComboBox<String> ProduktComboBox;
     private javax.swing.JLabel ProduktLabel;
-    private javax.swing.JButton TransakcjaButton;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton PrzygotujButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.ButtonGroup radioGroup;
     // End of variables declaration//GEN-END:variables
 }
