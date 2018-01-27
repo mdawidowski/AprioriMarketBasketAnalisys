@@ -25,8 +25,10 @@ public static void przygotujplik(){
          while(tekst!=null){
            counter += 1;
            tekscik = tekst.substring(0,57);
-           tekscik = tekst.replace(" ;", ";");
-           tekscik = tekst.replace(" 00:00:00", "");
+           tekscik = tekscik.replace("  ;", ";");
+           tekscik = tekscik.replace(" ;", ";");
+           tekscik = tekscik.replace(" 00:00:00;", ";");
+           tekscik += ";0";
            sB.append(tekscik);
            sB.append("\n");
            tekst = fin.readLine();

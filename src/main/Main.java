@@ -16,16 +16,20 @@ import javax.swing.SwingUtilities;
 public class Main {
   public static void main(String[] args) {
       SwingUtilities.invokeLater(() -> {
-          view.Widok interfejs = new view.Widok();
-          model.Funkcje funkcje = new model.Funkcje();
-          
-          Widok okno = new view.Widok();
           try {
-              model.Funkcje.displayProducts();
+              view.Widok interfejs = new view.Widok();
+              model.Funkcje funkcje = new model.Funkcje();
+              
+              Widok okno = new view.Widok();
+              try {
+                  model.Funkcje.getProducts();
+              } catch (SQLException ex) {
+                  Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+              }
+              okno.setVisible(true);
           } catch (SQLException ex) {
               Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
           }
-          okno.setVisible(true);
       });
               }
 
