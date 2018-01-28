@@ -6,13 +6,18 @@
 package view;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * widoki
@@ -100,6 +105,12 @@ public Widok() throws SQLException {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(ProduktLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(201, 201, 201))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
@@ -109,18 +120,12 @@ public Widok() throws SQLException {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(CalculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185)
-                                .addComponent(PrzygotujButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(PrzygotujButton)
+                                .addGap(184, 184, 184)
                                 .addComponent(CloseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(61, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(ProduktLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(201, 201, 201))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +137,13 @@ public Widok() throws SQLException {
                 .addGap(18, 18, 18)
                 .addComponent(ProduktComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CalculateButton)
                     .addComponent(PrzygotujButton)
-                    .addComponent(CloseButton))
-                .addContainerGap(55, Short.MAX_VALUE))
+                    .addComponent(CloseButton)
+                    .addComponent(CalculateButton))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,11 +160,10 @@ private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                 DefaultTableModel models = new DefaultTableModel(columnNames, 0);
                 String[] tab = new String[6];
                 int ilosctransakcji = model.Funkcje.countNumberofTransactions();
-                
                 DecimalFormat df = new DecimalFormat("#.#########");
                 for (int i = 0; i < totable.length/2; i+=2) {
-                    int wspolnewystapienia = Integer.parseInt(totable[i+1]);
-                    float support = model.Funkcje.countSupport(wspolnewystapienia, ilosctransakcji); // ilość wspólnych wystąpień/ilość wszystkich transakcji
+                        int wspolnewystapienia = Integer.parseInt(totable[i+1]);
+                        float support = model.Funkcje.countSupport(wspolnewystapienia, ilosctransakcji); // ilość wspólnych wystąpień/ilość wszystkich transakcji
                         int countit = model.Funkcje.countTransactionList((String) ProduktComboBox.getSelectedItem()); // zlicz ilość transakcji dla elementu
                         float supportA = model.Funkcje.countSupport(countit, ilosctransakcji); // oblicz support(A)
                         float confidence = model.Funkcje.countConfidence(support,supportA);    // oblicz Confidence support(A->B)/support(B)
@@ -176,6 +180,9 @@ private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                         models.addRow(tab);
                         jTable1.setModel(models);
                 }
+                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+                jTable1.setRowSorter(sorter);
+                List<RowSorter.SortKey> sortKeys = new ArrayList<>();
 
         } catch (SQLException ex) {
                 Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,8 +198,8 @@ private void PrzygotujButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
         try {
                 funkcje.DataPreparation.przygotujplik();
                 model.Funkcje.insertToDB();
-                model.Funkcje.insertTransactionIdtoDB(); 
-    // TODO add your handling code here:
+                model.Funkcje.insertTransactionIdtoDB();
+                // TODO add your handling code here:
         } catch (IOException | SQLException ex) {
                 Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);
         }
