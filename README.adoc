@@ -7,13 +7,16 @@
 
 # Market Basket Analisys
 
+## Projekt na zaliczenie z Inteligencji Obliczeniowej
+
 ### author: Marcin Dawidowski
 
 Głównym założeniem projektu jest analiza kupowanych zestawów rzeczy za pomocą napisanego przez siebie algorytmu Apriori do odkrywania reguł asocjacyjnych.
 
 #### Realizacja
 Projekt został wykonany w języku Java. Aplikacja korzysta z bazy danych SQLite, w której przechowywane są dane. Aplikacja wyposażona została w interfejs graficzny,
-w którym możliwy jest wybór produktu dla którego szukamy reguł asocjacyjnych.
+w którym możliwy jest wybór produktu dla którego szukamy reguł asocjacyjnych. Reguły asocjacyjne wyszukane dla danego produktu wyświetlane są w tabeli, która posiada
+opcję sortowania danych według każdej z użytych miar.
 
 === Wygląd aplikacji
 image:app.png[App,float="left]
@@ -28,4 +31,6 @@ Reguły oceniane są pod względem różnych miar:
   - Lift > 1 – zdarzenia skorelowane pozytywnie
 * conviction czyli przekonanie. Jest to odwrotność wartości lift
 
-Dodano takopcję sortowania odkrytych reguł wg każdej z użytych miar.
+Aplikacja operuje na bazie danych https://stackoverflow.com/questions/25014904/download-link-for-ta-feng-grocery-dataset[Ta-Feng Grocery Dataset], a dokładnie pliku D01..txt.
+Otrzymane dane zostają odpowiednio przygotowane, tzn. plik jest obcinany z niepotrzebnych danych i wrzucany do bazy danych. Potem na podstawie daty i numeru klienta tworzone są transakcje (dodatkowa kolumna w bazie danych).
+Następnie za pomocą własnego algorytmu wybrany produkt zostaje porównywany z innymi produktami, które występują wspólnie z nim w transakcjach.
