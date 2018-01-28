@@ -89,6 +89,7 @@ public Widok() throws SQLException {
             }
         });
 
+        ;
         Object columnNames[] = {"Produkt ID", "Ilosc wystąpień", "Support","Confidence","Lift","Conviction"};
         DefaultTableModel models = new DefaultTableModel(columnNames, 0);
         jTable1.setModel(models);
@@ -178,11 +179,12 @@ private void CalculateButtonActionPerformed(java.awt.event.ActionEvent evt) {//G
                         tab[4] = df.format(lift);
                         tab[5] = df.format(conviction);
                         models.addRow(tab);
-                        jTable1.setModel(models);
+                                             
                 }
-                TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(jTable1.getModel());
+                jTable1.setModel(models);
+                TableRowSorter<TableModel> sorter = new TableRowSorter<>(models);
                 jTable1.setRowSorter(sorter);
-                List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+                List<RowSorter.SortKey> sortKeys = new ArrayList<>(100);
 
         } catch (SQLException ex) {
                 Logger.getLogger(Widok.class.getName()).log(Level.SEVERE, null, ex);

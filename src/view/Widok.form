@@ -154,7 +154,7 @@
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable()"/>
-            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="Object columnNames[] = {&quot;Produkt ID&quot;, &quot;Ilosc wyst&#x105;pie&#x144;&quot;, &quot;Support&quot;,&quot;Confidence&quot;,&quot;Lift&quot;,&quot;Conviction&quot;};&#xa;DefaultTableModel models = new DefaultTableModel(columnNames, 0);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value=";&#xa;Object columnNames[] = {&quot;Produkt ID&quot;, &quot;Ilosc wyst&#x105;pie&#x144;&quot;, &quot;Support&quot;,&quot;Confidence&quot;,&quot;Lift&quot;,&quot;Conviction&quot;};&#xa;DefaultTableModel models = new DefaultTableModel(columnNames, 0);"/>
           </AuxValues>
         </Component>
       </SubComponents>
